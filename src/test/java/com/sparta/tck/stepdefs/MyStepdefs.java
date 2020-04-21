@@ -1,5 +1,8 @@
 package com.sparta.tck.stepdefs;
 
+import com.sparta.tck.driver.DriverManager;
+import com.sparta.tck.driver.DriverManagerFactory;
+import com.sparta.tck.driver.DriverType;
 import com.sparta.tck.page.FormPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -9,12 +12,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class MyStepdefs {
-    WebDriver webDriver = new ChromeDriver();
+    //WebDriver webDriver = new ChromeDriver();
+    DriverManager  driverManager = DriverManagerFactory.getManager(DriverType.FIREFOX);
     FormPage formPage;
 
     @Given("I am on the form page")
     public void iAmOnTheFormPage() {
-        formPage = new FormPage(webDriver);
+        formPage = new FormPage(driverManager.getDriver());
     }
 
     // ------First Name Field
@@ -27,7 +31,7 @@ public class MyStepdefs {
     @Then("The form validated my first name")
     public void theFormValidatedMyFirstName() {
         Assertions.assertFalse(formPage.isValidFirstName());
-        webDriver.close();
+        driverManager.getDriver().close();
     }
 
     @When("I enter a invalid first name into the field")
@@ -39,7 +43,7 @@ public class MyStepdefs {
     @Then("The form informs me of an invalid first name")
     public void theFormInformsMeOfAnInvalidFirstName() {
         Assertions.assertTrue(formPage.isValidFirstName());
-        webDriver.close();
+        driverManager.getDriver().close();
     }
 
     // ------Last Name Field
@@ -52,7 +56,7 @@ public class MyStepdefs {
     @Then("The form validated my last name")
     public void theFormValidatedMyLastName() {
         Assertions.assertFalse(formPage.isValidLastName());
-        webDriver.close();
+        driverManager.getDriver().close();
     }
 
     @When("I enter a invalid last name into the field")
@@ -64,7 +68,7 @@ public class MyStepdefs {
     @Then("The form informs me of an invalid last name")
     public void theFormInformsMeOfAnInvalidLastName() {
         Assertions.assertTrue(formPage.isValidLastName());
-        webDriver.close();
+        driverManager.getDriver().close();
     }
 
     // ------Age Field
@@ -77,7 +81,7 @@ public class MyStepdefs {
     @Then("The form validated the number entered for age")
     public void theFormValidatedTheNumberEnteredForAge() {
         Assertions.assertFalse(formPage.isValidAge());
-        webDriver.close();
+        driverManager.getDriver().close();
     }
 
     @When("I enter a invalid number for age into the field")
@@ -89,7 +93,7 @@ public class MyStepdefs {
     @Then("The form informs me of an invalid number for age")
     public void theFormInformsMeOfAnInvalidNumberForAge() {
         Assertions.assertTrue(formPage.isValidAge());
-        webDriver.close();
+        driverManager.getDriver().close();
     }
 
     // ------Gender Field
@@ -102,13 +106,13 @@ public class MyStepdefs {
     @Then("The correct selected gender is displayed")
     public void theCorrectSelectedGenderIsDisplayed() {
         Assertions.assertTrue(formPage.isMGenderSelected());
-        webDriver.close();
+        driverManager.getDriver().close();
     }
 
     @Then("The opposite gender is not selected")
     public void theOppositeGenderIsNotSelected() {
         Assertions.assertFalse(formPage.isFGenderSelected());
-        webDriver.close();
+        driverManager.getDriver().close();
     }
 
     // ------University Field
@@ -121,7 +125,7 @@ public class MyStepdefs {
     @Then("I have selected a university")
     public void iHaveSelectedAUniversity() {
         Assertions.assertTrue(formPage.isUniversitySelected());
-        webDriver.close();
+        driverManager.getDriver().close();
     }
 
     // ------Email Field
@@ -134,7 +138,7 @@ public class MyStepdefs {
     @Then("The form validated the email that was entered")
     public void theFormValidatedTheEmailThatWasEntered() {
         Assertions.assertFalse(formPage.isValidEmail());
-        webDriver.close();
+        driverManager.getDriver().close();
     }
 
     @When("I enter a invalid email into the field")
@@ -146,7 +150,7 @@ public class MyStepdefs {
     @Then("The form informs me of an invalid email")
     public void theFormInformsMeOfAnInvalidEmail() {
         Assertions.assertTrue(formPage.isValidEmail());
-        webDriver.close();
+        driverManager.getDriver().close();
     }
 
     // ------Rate Field
